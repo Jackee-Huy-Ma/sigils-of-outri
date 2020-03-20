@@ -1,8 +1,9 @@
- # Makefile template for Static library
- # 1. Compile every *.cpp in the folder
- # 2. All obj files under obj folder
- # 3. static library .a at lib folder
- # 4. run 'make dirmake' before calling 'make'
+#  Makefile template for Static library. 
+# 1. Compile every *.cpp in the folder 
+# 2. All obj files under obj folder
+# 3. static library .a at lib folder
+# 4. run 'make dirmake' before calling 'make'
+
 
 CC = g++
 OUT_FILE_NAME = blue-tiles-engine-lite.a
