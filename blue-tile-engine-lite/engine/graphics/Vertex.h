@@ -4,6 +4,13 @@
 #include<iostream>
 
 
+//Enum representing attributes of a vertex
+enum vertexAttributes {
+    position = 0,
+    color = 1,
+    texCoord = 2,
+    normal = 3
+};
 
 class Vertex {
 public:

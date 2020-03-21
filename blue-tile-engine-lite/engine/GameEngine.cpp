@@ -17,6 +17,10 @@ GameEngine::GameEngine(GLFWwindow * targetWindow)
 
     //used for user window resizing.
     glfwSetFramebufferSizeCallback(m_window, framebuffer_size_callback);
+
+    //Shaders
+    m_shader = new Shader("/glsl/Vertex.glsl", "/glsl/Fragment.glsl");
+
     
 }
 

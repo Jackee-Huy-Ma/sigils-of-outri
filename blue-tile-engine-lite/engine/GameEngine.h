@@ -1,6 +1,9 @@
 #pragma once
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <glad/glad.h>
+#include "Shader.h"
+
 class GameEngine {
 public:
     //Constructor to game engine that takes a GLFWwindow
@@ -15,7 +18,6 @@ public:
     //Main Loop for a game
     void update();
 
-    //TODO
     //draw
     void draw();
 
@@ -35,4 +37,6 @@ private:
     //function that updates fps counter
     void updateFPSCounter();
 
+    //Shader Manager.
+    Shader * m_shader;
 };
