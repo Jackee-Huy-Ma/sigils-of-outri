@@ -30,7 +30,7 @@ int GameWindow::SetupGLFWwindow() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    m_window = glfwCreateWindow(m_windowWidth, m_windowWidth, "Sigils of Outri", NULL, NULL);
+    m_window = glfwCreateWindow(m_windowWidth, m_windowHeight, "Sigils of Outri", NULL, NULL);
 
     //Error check on startup of m_window
     if(m_window == NULL) {

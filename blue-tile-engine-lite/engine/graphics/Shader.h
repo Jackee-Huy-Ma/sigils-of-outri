@@ -9,7 +9,7 @@
 class Shader {
 public:
     //Program ID
-    GLuint programHandle;
+    GLuint programHandle = 0;
 
     //Constructor reads and builds shader
     Shader(const char * vertexPath, const char * fragmentPath);

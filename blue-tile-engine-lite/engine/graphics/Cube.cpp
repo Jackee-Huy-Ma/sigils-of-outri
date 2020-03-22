@@ -1,4 +1,5 @@
 #include "Cube.h"
+#include "Vertex.h"
 
 Cube::Cube() {
     initCube();
@@ -6,7 +7,6 @@ Cube::Cube() {
 
 Cube::~Cube() {
     m_indexList.clear();
-    m_vertexList.clear();
 }
 
 void Cube::initCube() {
@@ -46,7 +46,7 @@ void Cube::initCube() {
         Vertex(-1, -1,  1, 0, 0, 1, 1,  0, 1,  0,-1, 0), // 22
         Vertex(-1, -1, -1, 0, 0, 0, 1,  0, 0,  0,-1, 0), // 23
     };
-
+    
     m_indexList = {
          // Front
         0, 1, 2,

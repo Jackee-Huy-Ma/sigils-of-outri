@@ -1,9 +1,9 @@
 #pragma once
+#include<glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include <glad/glad.h>
-#include "Shader.h"
 
+class Shader;
 class GameEngine {
 public:
     //Constructor to game engine that takes a GLFWwindow
@@ -20,6 +20,9 @@ public:
 
     //draw
     void draw();
+
+    //Getter
+    Shader * getShader();
 
 private:
     //Pointer to a GLFWwindow

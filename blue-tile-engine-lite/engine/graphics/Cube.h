@@ -1,9 +1,9 @@
 #pragma once
-#include "../Vertex.h"
 #include <vector>
 #include <glm/glm.hpp>
 #include <glad/glad.h>
 
+class Vertex;
 class Cube {
 public:
     //Default constructor
@@ -12,9 +12,13 @@ public:
     //Deconstructor
     ~Cube();
 
+    unsigned int VBO = 0;
+
+    unsigned int VAO = 0;
+
 private:
      //List of Gluint
-    std::vector<GLuint> m_indexList;
+    std::vector<float> m_indexList;
 
     //List of vertices
     std::vector<Vertex> m_vertexList;

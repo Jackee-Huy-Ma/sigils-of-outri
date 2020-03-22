@@ -3,7 +3,6 @@
 #include<glm/glm.hpp>
 #include<iostream>
 
-
 //Enum representing attributes of a vertex
 enum vertexAttributes {
     position = 0,
