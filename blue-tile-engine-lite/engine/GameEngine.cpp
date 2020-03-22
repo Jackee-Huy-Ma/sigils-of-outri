@@ -1,4 +1,5 @@
 #include "GameEngine.h"
+#include "graphics/Shader.h"
 
 //settings
 constexpr unsigned int WIDTH = 600;
@@ -17,7 +18,12 @@ GameEngine::GameEngine(GLFWwindow * targetWindow)
 
     //used for user window resizing.
     glfwSetFramebufferSizeCallback(m_window, framebuffer_size_callback);
-    
+
+     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+    }
+    //Shaders
+    m_shader = new Shader("../blue-tile-engine-lite/engine/graphics/glsl/Vertex.glsl", "../blue-tile-engine-lite/engine/graphics/glsl/Fragment.glsl");
 }
 
 GameEngine::~GameEngine() {
@@ -50,4 +56,8 @@ void GameEngine::draw() {
 void framebuffer_size_callback(GLFWwindow * window, int width, int height) {
     std::cout << "here" << std::endl;
     glViewport(0, 0, width, height);
+}
+
+Shader * GameEngine::getShader() {
+    return m_shader;
 }
