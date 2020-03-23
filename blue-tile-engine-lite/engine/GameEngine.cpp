@@ -54,7 +54,6 @@ void GameEngine::draw() {
     glfwSwapBuffers(m_window);
 }
 void framebuffer_size_callback(GLFWwindow * window, int width, int height) {
-    std::cout << "here" << std::endl;
     glViewport(0, 0, width, height);
 }
 

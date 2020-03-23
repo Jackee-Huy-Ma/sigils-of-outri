@@ -15,6 +15,12 @@ public:
 
     unsigned int m_VAO = 0;
 
+    unsigned int m_EBO = 0;
+
+    void draw();
+
 private:
     std::vector<float> m_vertices;
+
+    std::vector<unsigned int> m_indices;
 };
