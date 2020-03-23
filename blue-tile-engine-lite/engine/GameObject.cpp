@@ -21,6 +21,5 @@ GameObject::~GameObject() {
 
 void GameObject::Draw(Shader& shader) {
     shader.use();
-    glBindVertexArray(m_mesh->m_VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    m_mesh->draw();
 }
