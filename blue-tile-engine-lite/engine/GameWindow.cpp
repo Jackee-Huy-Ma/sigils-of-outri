@@ -42,6 +42,13 @@ int GameWindow::SetupGLFWwindow() {
     return 0;
 }
 
+int GameWindow::getWindowWidth() {
+    return m_windowWidth;
+}
+
+int GameWindow::getWindowHeight() {
+    return m_windowHeight;
+}
 //Get function returns GLFWwindow pointer
 GLFWwindow * GameWindow::getWindow() {
     return m_window;

@@ -10,6 +10,9 @@ public:
     int SetupGLFWwindow();
     GLFWwindow * getWindow();
 
+    int getWindowWidth();
+    int getWindowHeight();
+
 private:
     // Pointer to GLFWwindow.
     GLFWwindow * m_window;

@@ -26,7 +26,6 @@ public:
     glm::vec3 getPosition();
     glm::vec3 getRotation();
     glm::vec3 getForward();
-    glm::mat4 getTransformMatrix();
 
     //Setters
     void setId(GLuint id) const;
@@ -34,12 +33,17 @@ public:
     void setPosition(glm::vec3 position) const;
     void setRotation(glm::vec3 rotation) const;
     void setForward(glm::vec3 forward) const;
+
+
     */
+    glm::mat4 getTransformMatrix();
+    void setTransformMatrix(glm::mat4 transformMatrix);
+
     //Update Transform Matrix
-    //void updateTransformMatrix();
+    void updateTransformMatrix();
 
     //update
-    void update(glm::vec2 windowSize);
+    void update();
 
     //draw
     void draw(Shader & shader);
