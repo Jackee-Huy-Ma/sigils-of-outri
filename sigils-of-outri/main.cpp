@@ -4,6 +4,7 @@
 #include <engine/graphics/Quad.h>
 #include <engine/graphics/Shader.h>
 #include <engine/GameObject.h>
+#include <engine/graphics/Texture.h>
 #include <glm/glm.hpp>
 
 constexpr int WINDOW_WIDTH = 800;
@@ -19,13 +20,14 @@ int main() {
 
     std::shared_ptr<GameEngine> engine = std::make_shared<GameEngine>(gameWindow.getWindow());
     
-    GameObject * gameObject = new GameObject("Quad", glm::vec3(0), glm::vec3(0), glm::vec3(1));
-   
+    GameObject * gameObject = new GameObject("Quad", glm::vec3(0), glm::vec3(0), glm::vec3(1), "../assets/main_character.png");
+    
     while(!glfwWindowShouldClose(gameWindow.getWindow())) {
         engine->processEvent(gameWindow.getWindow());
         engine->update();
         glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        gameObject->update(glm::vec2(WINDOW_WIDTH, WINDOW_HEIGHT));
         gameObject->Draw(*(engine->getShader()));
         engine->draw();
     }
