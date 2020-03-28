@@ -24,6 +24,9 @@ GameEngine::GameEngine(GLFWwindow * targetWindow)
     }
     //Shaders
     m_shader = new Shader("../blue-tile-engine-lite/engine/graphics/glsl/Vertex.glsl", "../blue-tile-engine-lite/engine/graphics/glsl/Fragment.glsl");
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 }
 
 GameEngine::~GameEngine() {

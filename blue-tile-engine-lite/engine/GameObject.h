@@ -9,10 +9,9 @@ class Quad;
 class Shader;
 class GameObject {
 public:
-    //Constructor takes in a name, position, rotation, scale
-    GameObject(std::string name = "Default", glm::vec3 position = glm::vec3(0, 0, 0),
-            glm::vec3 rotation = glm::vec3(0, 0, 0), glm::vec3 scale = glm::vec3(1, 1, 1));
-    
+    //Constructor takes in a name, position, rotation, scale, texture
+    GameObject(std::string name, glm::vec3 position,
+            glm::vec3 rotation, glm::vec3 scale, const char * texturePath);    
     //Deconstructor
     ~GameObject();
 
@@ -40,7 +39,7 @@ public:
     //void updateTransformMatrix();
 
     //update
-    //void update(float deltaTime);
+    void update(glm::vec2 windowSize);
 
     //draw
     void draw(Shader & shader);
@@ -70,6 +69,8 @@ private:
     //Model of the GameObject
     //In this case just a cube
     Quad * m_mesh;
+    
+
     //Static id counter gets incremented
     static int idCounter;
 };

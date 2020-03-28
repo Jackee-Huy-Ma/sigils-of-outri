@@ -3,11 +3,13 @@
 #include <glm/glm.hpp>
 #include <glad/glad.h>
 
+class Texture;
 class Quad {
 public:
     //Default constructor
     Quad();
 
+    Quad(const char * texturePath);
     //Deconstructor
     ~Quad();
 
@@ -19,8 +21,13 @@ public:
 
     void draw();
 
+    Texture * getTexture();
+
 private:
     std::vector<float> m_vertices;
 
     std::vector<unsigned int> m_indices;
+
+    Texture * m_texture;
+
 };

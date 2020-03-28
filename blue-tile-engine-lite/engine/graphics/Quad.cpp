@@ -1,12 +1,13 @@
 #include "Quad.h"
+#include "Texture.h"
 
-Quad::Quad() {
+Quad::Quad(const char * texturePath) {
     m_vertices = {
-        // positions         // colors
-        0.5f, 0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  // bottom right
-        0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  // bottom left
-        -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-        -0.5,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f   // top 
+        // positions         // colors        // uv
+        0.5f, 0.5f, 0.0f,  1.0f, 1.0f, 1.0f,  1.0f, 1.0f, // top right
+        0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f, 1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, // bottom left
+        -0.5,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f, 0.0f, 1.0f  // top left 
     };
 
     m_indices = {
@@ -14,6 +15,7 @@ Quad::Quad() {
         1, 2, 3
     };
 
+    m_texture = new Texture(texturePath);
     glGenVertexArrays(1, &m_VAO);
     glGenBuffers(1, &m_VBO);
     glGenBuffers(1, &m_EBO);
@@ -29,13 +31,18 @@ Quad::Quad() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(unsigned int), &m_indices.front(), GL_STATIC_DRAW);
 
-    // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    // position attributes
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     
-    // color attribute
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    // color attributes
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+
+    // texture attributes
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0); 
@@ -46,7 +53,13 @@ Quad::~Quad() {
 }
 
 void::Quad::draw() {
+    glBindTexture(GL_TEXTURE_2D, (m_texture->getTextureId()));
     glBindVertexArray(m_VAO);
+    
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     //glBindVertexArray(0);
+}
+
+Texture *::Quad::getTexture() {
+    return m_texture;
 }
