@@ -58,9 +58,9 @@ void GameObject::updateTransformMatrix() {
     glm::vec3 imageDimensions = glm::vec3(imageWidth, imageHeight, 1);
     m_transformMatrix = glm::scale(m_transformMatrix, imageDimensions * m_scale);    
 
-    glm::mat4 myOrtho = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
+    //glm::mat4 myOrtho = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
 
-    m_transformMatrix = myOrtho * m_transformMatrix;
+    //m_transformMatrix = myOrtho * m_transformMatrix;
 
     //m_transformMatrix = glm::scale(translationMatrix);
 }

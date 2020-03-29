@@ -2,8 +2,8 @@
 #include "graphics/Shader.h"
 
 //settings
-constexpr unsigned int WIDTH = 600;
-constexpr unsigned int HEIGHT = 800;
+constexpr unsigned int WIDTH = 800;
+constexpr unsigned int HEIGHT = 600;
 
 //Function to set viewport
 void framebuffer_size_callback(GLFWwindow * window, int width, int height);
@@ -49,6 +49,10 @@ void GameEngine::updateFPSCounter() {
     }
 }
 void GameEngine::update() {
+    int height;
+    int width;
+    glfwGetWindowSize(m_window, &width, &height);
+    m_ortho = glm::ortho(0.0f, (float)width, 0.0f, (float)height);
     GameEngine::updateFPSCounter();
 }
 

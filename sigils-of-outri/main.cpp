@@ -28,7 +28,7 @@ int main() {
         glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         gameObject->update();
-        //gameObject->setTransformMatrix(engine->m_ortho * gameObject->getTransformMatrix()); 
+        gameObject->setTransformMatrix(engine->m_ortho * gameObject->getTransformMatrix()); 
         gameObject->Draw(*(engine->getShader()));
         engine->draw();
     }
