@@ -2,7 +2,7 @@
 #include<glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-
+#include <glm/glm.hpp>
 class Shader;
 class GameEngine {
 public:
@@ -23,6 +23,8 @@ public:
 
     //Getter
     Shader * getShader();
+
+    glm::mat4 m_ortho;
 
 private:
     //Pointer to a GLFWwindow

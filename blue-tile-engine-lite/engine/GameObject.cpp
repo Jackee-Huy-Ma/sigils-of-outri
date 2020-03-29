@@ -20,25 +20,55 @@ GameObject::~GameObject() {
     delete m_mesh;
 }
 
-void GameObject::update(glm::vec2 windowSize) {
+void GameObject::update() {
+    /*
     m_transformMatrix = glm::mat4(1);
-    float imageWidth = m_mesh->getTexture()->getWidth();
-    float imageHeight = m_mesh->getTexture()->getHeight();
     
     glm::mat4 myOrtho = glm::ortho(0.0f, windowSize.x, 0.0f, windowSize.y);
-    glm::vec3 imageDimensions = glm::vec3(imageWidth, imageHeight, 1);
 
-    m_transformMatrix = glm::translate(m_transformMatrix, glm::vec3(windowSize.x / 2, windowSize.y / 2, 0));
-    m_transformMatrix = glm::scale(m_transformMatrix, imageDimensions);    
+    //m_transformMatrix = glm::translate(m_transformMatrix, glm::vec3(windowSize.x / 2, windowSize.y / 2, 0));
     
     //TO-DO MAKE MVP VARIABLE.
     m_transformMatrix = myOrtho * m_transformMatrix;
-    
-
+    */
+   updateTransformMatrix();
 }
 
 void GameObject::Draw(Shader& shader) {
     shader.use();
     shader.setMat4("transform",m_transformMatrix);
     m_mesh->draw();
+}
+
+void GameObject::updateTransformMatrix() {
+    //Rotatation
+    
+    glm::quat rotationQuaternion = glm::quat(m_rotation);
+    glm::mat4 rotationMatrix = glm::mat4(rotationQuaternion);
+
+    //Translation
+    //Testing
+    m_transformMatrix = glm::mat4(1);
+    m_transformMatrix = glm::translate(m_transformMatrix, glm::vec3(400.0f, 300.0f, 0));
+
+    //= glm::translate(glm::mat4(1), m_position);
+    //Scaling
+    float imageWidth = m_mesh->getTexture()->getWidth();
+    float imageHeight = m_mesh->getTexture()->getHeight();
+    glm::vec3 imageDimensions = glm::vec3(imageWidth, imageHeight, 1);
+    m_transformMatrix = glm::scale(m_transformMatrix, imageDimensions * m_scale);    
+
+    //glm::mat4 myOrtho = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
+
+    //m_transformMatrix = myOrtho * m_transformMatrix;
+
+    //m_transformMatrix = glm::scale(translationMatrix);
+}
+
+void GameObject::setTransformMatrix(glm::mat4 transformationMatrix) {
+    m_transformMatrix = transformationMatrix;
+}
+
+glm::mat4 GameObject::getTransformMatrix() {
+    return m_transformMatrix;
 }

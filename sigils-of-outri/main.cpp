@@ -27,7 +27,8 @@ int main() {
         engine->update();
         glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        gameObject->update(glm::vec2(WINDOW_WIDTH, WINDOW_HEIGHT));
+        gameObject->update();
+        gameObject->setTransformMatrix(engine->m_ortho * gameObject->getTransformMatrix()); 
         gameObject->Draw(*(engine->getShader()));
         engine->draw();
     }

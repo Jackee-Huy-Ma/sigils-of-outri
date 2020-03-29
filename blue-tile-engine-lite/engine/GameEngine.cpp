@@ -2,8 +2,8 @@
 #include "graphics/Shader.h"
 
 //settings
-constexpr unsigned int WIDTH = 600;
-constexpr unsigned int HEIGHT = 800;
+constexpr unsigned int WIDTH = 800;
+constexpr unsigned int HEIGHT = 600;
 
 //Function to set viewport
 void framebuffer_size_callback(GLFWwindow * window, int width, int height);
@@ -26,7 +26,7 @@ GameEngine::GameEngine(GLFWwindow * targetWindow)
     m_shader = new Shader("../blue-tile-engine-lite/engine/graphics/glsl/Vertex.glsl", "../blue-tile-engine-lite/engine/graphics/glsl/Fragment.glsl");
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+    m_ortho = glm::ortho(0.0f, (float)WIDTH, 0.0f, (float)HEIGHT);
 }
 
 GameEngine::~GameEngine() {
@@ -35,7 +35,6 @@ GameEngine::~GameEngine() {
 
 void GameEngine::processEvent(GLFWwindow *targetWindow) {
     glfwPollEvents();
-    
     if(glfwGetKey(targetWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(m_window, true);
 }
@@ -50,6 +49,10 @@ void GameEngine::updateFPSCounter() {
     }
 }
 void GameEngine::update() {
+    int height;
+    int width;
+    glfwGetWindowSize(m_window, &width, &height);
+    m_ortho = glm::ortho(0.0f, (float)width, 0.0f, (float)height);
     GameEngine::updateFPSCounter();
 }
 
