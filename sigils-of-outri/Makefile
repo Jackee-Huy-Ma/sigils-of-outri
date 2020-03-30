@@ -1,5 +1,5 @@
 #OBJS All c or cpp files
-OBJS =  main.cpp ../blue-tile-engine-lite/glad.c
+OBJS =  main.cpp ../blue-tile-engine-lite/glad.c Player.cpp
 
 #CC Which Compiler to use.
 CC = g++

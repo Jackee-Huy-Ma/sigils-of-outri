@@ -19,36 +19,8 @@ public:
     //virtual void Update();
 
     //Draw
-    virtual void Draw(Shader& shader);
-    //Getters
-    /*GLuint getId();
-    std::string getName();
-    glm::vec3 getPosition();
-    glm::vec3 getRotation();
-    glm::vec3 getForward();
-
-    //Setters
-    void setId(GLuint id) const;
-    void setName(std::string & name) const;
-    void setPosition(glm::vec3 position) const;
-    void setRotation(glm::vec3 rotation) const;
-    void setForward(glm::vec3 forward) const;
-
-
-    */
-    glm::mat4 getTransformMatrix();
-    void setTransformMatrix(glm::mat4 transformMatrix);
-
-    //Update Transform Matrix
-    void updateTransformMatrix();
-
-    //update
-    void update();
-
-    //draw
-    void draw(Shader & shader);
-
-private:
+    void Draw(Shader& shader);
+    
     //GameObject ID
     GLuint m_Id;
 
@@ -63,7 +35,20 @@ private:
 
     //Scale of GameObject
     glm::vec3 m_scale;
+   
+    glm::mat4 getTransformMatrix();
+    void setTransformMatrix(glm::mat4 transformMatrix);
 
+    //Update Transform Matrix
+    void updateTransformMatrix();
+
+    //update
+    virtual void update(float deltaTime);
+
+    //draw
+    void draw(Shader & shader);
+
+private:
     //Forward of GameObject
     glm::vec3 m_forward;
     
@@ -73,7 +58,6 @@ private:
     //Model of the GameObject
     //In this case just a cube
     Quad * m_mesh;
-    
 
     //Static id counter gets incremented
     static int idCounter;
