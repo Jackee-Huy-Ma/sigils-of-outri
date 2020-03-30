@@ -9,8 +9,4 @@ public:
     ~Player();
 
     void update(float deltaTime);
-
-    glm::vec3 m_velocity;
-
-    float m_speed = 0.0f;
 };

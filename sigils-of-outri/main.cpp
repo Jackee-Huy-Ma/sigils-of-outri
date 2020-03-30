@@ -50,7 +50,7 @@ int main() {
     
     //GameObject * gameObject = new GameObject("Quad", glm::vec3(0), glm::vec3(0), glm::vec3(1), "../assets/main_character.png");
     
-    Player * player = new Player("Quad", glm::vec3(0), glm::vec3(0), glm::vec3(1), "../assets/main_character.png");
+    GameObject * player = (Player *) new Player("Quad", glm::vec3(0), glm::vec3(0), glm::vec3(1), "../assets/main_character.png");
 
     float previousTime = glfwGetTime();
     while(!glfwWindowShouldClose(gameWindow.getWindow())) {
