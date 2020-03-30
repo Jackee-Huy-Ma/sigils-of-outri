@@ -20,17 +20,7 @@ GameObject::~GameObject() {
     delete m_mesh;
 }
 
-void GameObject::update() {
-    /*
-    m_transformMatrix = glm::mat4(1);
-    
-    glm::mat4 myOrtho = glm::ortho(0.0f, windowSize.x, 0.0f, windowSize.y);
-
-    //m_transformMatrix = glm::translate(m_transformMatrix, glm::vec3(windowSize.x / 2, windowSize.y / 2, 0));
-    
-    //TO-DO MAKE MVP VARIABLE.
-    m_transformMatrix = myOrtho * m_transformMatrix;
-    */
+void GameObject::update(float deltaTime) {
    updateTransformMatrix();
 }
 
@@ -49,9 +39,9 @@ void GameObject::updateTransformMatrix() {
     //Translation
     //Testing
     m_transformMatrix = glm::mat4(1);
-    m_transformMatrix = glm::translate(m_transformMatrix, glm::vec3(400.0f, 300.0f, 0));
+    //m_transformMatrix = glm::translate(m_transformMatrix, glm::vec3(400.0f, 300.0f, 0));
 
-    //= glm::translate(glm::mat4(1), m_position);
+    m_transformMatrix = glm::translate(glm::mat4(1), m_position);
     //Scaling
     float imageWidth = m_mesh->getTexture()->getWidth();
     float imageHeight = m_mesh->getTexture()->getHeight();

@@ -7,6 +7,7 @@ Camera::Camera()
     , m_orientation()
     , m_viewMatrix() 
 {
+    setViewMatrix();
 }
 
 Camera::~Camera() {
@@ -20,18 +21,32 @@ Camera & Camera::getInstance() {
 
 void Camera::setPosition(const glm::vec3 & position) {
     m_position = position;
+    setViewMatrix();
     //calculate viewMatrix;
 }
 
 void Camera::setOrientation(const glm::vec3 & orientation) {
     m_orientation = orientation;
-    //viewmatrix
+    setViewMatrix();
 }
 
 void Camera::translate(const glm::vec3 & translation) {
     m_position += translation;
+    setViewMatrix();
+}
 
-    //viewmatrix
+void Camera::setPerspective(const float fov, float aspect, const float nearClip, const float farClip) {
+    m_clips.first = nearClip;
+    m_clips.second = farClip;
+    m_perspective = glm::perspective(fov, aspect, nearClip, farClip);
+}
+    
+    
+void Camera::setOrtho(GLFWwindow * window) {
+    int height;
+    int width;
+    glfwGetWindowSize(window, &width, &height);
+    m_ortho = glm::ortho(0.0f, (float)width, 0.0f, (float)height);
 }
 
 glm::vec3 Camera::getPosition() const {
@@ -48,6 +63,18 @@ glm::vec3 Camera::getForward() const {
 
 glm::mat4 Camera::getViewMatrix() const {
     return m_viewMatrix;
+}
+
+std::pair<float, float> Camera::getZclip() const {
+    return m_clips;
+}
+
+glm::mat4 Camera::getPerspective() const {
+    return m_perspective;
+}
+
+glm::mat4 Camera::getOrtho() const {
+    return m_ortho;
 }
 
 void Camera::setViewMatrix() {
