@@ -8,7 +8,7 @@
 #include <engine/graphics/Camera.h>
 #include <glm/glm.hpp>
 #include "Player.h"
-
+#include <iostream>
 constexpr int WINDOW_WIDTH = 800;
 constexpr int WINDOW_HEIGHT = 600;
 
@@ -70,19 +70,13 @@ int main() {
             player->m_velocity = glm::vec3(0);
         }
 
-
-        glm::vec3 distance = glm::vec3(player->m_position - Camera::getInstance().getPosition());
-        glm::vec3 c_velocity = glm::vec3(distance.x / CAMERA_TIME, distance.y / CAMERA_TIME, 0);
+        //Delta Time
         float currentTime = glfwGetTime();
         float delta = currentTime - previousTime;
         previousTime = glfwGetTime();
         
-        glm::vec3 c = Camera::getInstance().getPosition();
-        if(!(c.x > player->m_position.x - THRESHOLD && c.y > player->m_position.y - THRESHOLD && c.x < player->m_position.x + THRESHOLD && c.y < player->m_position.y + THRESHOLD)) {
-            glm::vec3 tempCameraPos = Camera::getInstance().getPosition();
-            tempCameraPos += c_velocity * delta;
-            Camera::getInstance().setPosition(tempCameraPos);
-        }
+        Camera::getInstance().followTarget(delta, CAMERA_TIME, THRESHOLD, player->m_position);
+
         // At each update(delta Time), translating Camera Position = velocity * deltaTime; D = V * T;
         engine->update();
         glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
@@ -93,7 +87,6 @@ int main() {
         player->Draw(*(engine->getShader()));
         engine->draw();
     }
-    //MOVE CAMERA THINGS INTO CAMERA.
     //Scale Player in Gameobject.cpp.
     //Fix Speed.
     //implement basic light.

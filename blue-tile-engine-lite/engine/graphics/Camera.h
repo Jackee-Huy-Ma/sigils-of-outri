@@ -3,6 +3,8 @@
 #include <utility>
 #include<glad/glad.h>
 #include <GLFW/glfw3.h>
+
+class GameObject;
 class Camera {
 public:
     //Deconstructor
@@ -50,6 +52,9 @@ public:
 
     //Get ortho
     glm::mat4 getOrtho() const;
+
+    //Camera follows a target. Used for following a player
+    void followTarget(float delta, const float CAMERA_TIME, const float THRESHOLD, glm::vec3 & targetPosition);
 
 private:
     //Constructor
