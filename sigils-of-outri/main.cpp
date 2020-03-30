@@ -32,23 +32,6 @@ int main() {
     //Camera Setup
     Camera::getInstance().setPosition(glm::vec3(0, 0, 1500.0f));
     Camera::getInstance().setPerspective(CAMERA_FOV, (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP);
-
-    
-    //Draw order matters
-    //character goes 2nd.
-    //Sequences of vertices given.
-    //layers.
-    //Sudo code for today goal.
-    //Want to Calculate the difference of position between camera and player
-    // Total Distance to move camera to reach player: temp pos = (gameObject.position - camera.getInstance().position)
-    // Time to travel this distance should be 0.5 senconds.
-    // Velocity = d / t; constant velocity. pos / 0.5
-    // If not statement(camera pos is > player position - threshod && camerapos < player position + threshold).
-        // At each update(delta Time), translating Camera Position = velocity * deltaTime; D = V * T;
-    //
-
-    
-    //GameObject * gameObject = new GameObject("Quad", glm::vec3(0), glm::vec3(0), glm::vec3(1), "../assets/main_character.png");
     
     GameObject * player = (Player *) new Player("Quad", glm::vec3(0), glm::vec3(0), glm::vec3(1), "../assets/main_character.png");
 
@@ -74,24 +57,19 @@ int main() {
         float currentTime = glfwGetTime();
         float delta = currentTime - previousTime;
         previousTime = glfwGetTime();
-        
-        Camera::getInstance().followTarget(delta, CAMERA_TIME, THRESHOLD, player->m_position);
 
-        // At each update(delta Time), translating Camera Position = velocity * deltaTime; D = V * T;
+        Camera::getInstance().followTarget(delta, CAMERA_TIME, THRESHOLD, player->m_position);
         engine->update();
+        
         glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        
         player->update(delta);
         player->setTransformMatrix(Camera::getInstance().getViewMatrix() * player->getTransformMatrix());
         player->setTransformMatrix(Camera::getInstance().getPerspective() * player->getTransformMatrix()); 
         player->Draw(*(engine->getShader()));
         engine->draw();
     }
-    //Scale Player in Gameobject.cpp.
-    //Fix Speed.
-    //implement basic light.
-    //TO-DO Wang's algorithm - Name generator & int generator, Make table.
-    //Write Report.
-    //Talk to borna.
+
     return 0;
 }
