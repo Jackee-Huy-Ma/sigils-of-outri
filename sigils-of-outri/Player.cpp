@@ -13,6 +13,6 @@ Player::~Player() {
 }
 
 void Player::update(float deltaTime) {
-    //m_position += glm::vec3(m_velocity.x * deltaTime, m_velocity.y * deltaTime, m_velocity.z * deltaTime);
+    m_position += glm::vec3(m_velocity.x * deltaTime, m_velocity.y * deltaTime, m_velocity.z * deltaTime);
     updateTransformMatrix();
 }
