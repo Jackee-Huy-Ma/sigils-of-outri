@@ -8,7 +8,7 @@
 #include <engine/graphics/Camera.h>
 #include <glm/glm.hpp>
 #include "Player.h"
-
+#include <iostream>
 constexpr int WINDOW_WIDTH = 800;
 constexpr int WINDOW_HEIGHT = 600;
 
@@ -32,25 +32,8 @@ int main() {
     //Camera Setup
     Camera::getInstance().setPosition(glm::vec3(0, 0, 1500.0f));
     Camera::getInstance().setPerspective(CAMERA_FOV, (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP);
-
     
-    //Draw order matters
-    //character goes 2nd.
-    //Sequences of vertices given.
-    //layers.
-    //Sudo code for today goal.
-    //Want to Calculate the difference of position between camera and player
-    // Total Distance to move camera to reach player: temp pos = (gameObject.position - camera.getInstance().position)
-    // Time to travel this distance should be 0.5 senconds.
-    // Velocity = d / t; constant velocity. pos / 0.5
-    // If not statement(camera pos is > player position - threshod && camerapos < player position + threshold).
-        // At each update(delta Time), translating Camera Position = velocity * deltaTime; D = V * T;
-    //
-
-    
-    //GameObject * gameObject = new GameObject("Quad", glm::vec3(0), glm::vec3(0), glm::vec3(1), "../assets/main_character.png");
-    
-    Player * player = new Player("Quad", glm::vec3(0), glm::vec3(0), glm::vec3(1), "../assets/main_character.png");
+    GameObject * player = (Player *) new Player("Quad", glm::vec3(0), glm::vec3(0), glm::vec3(1), "../assets/main_character.png");
 
     float previousTime = glfwGetTime();
     while(!glfwWindowShouldClose(gameWindow.getWindow())) {
@@ -70,35 +53,23 @@ int main() {
             player->m_velocity = glm::vec3(0);
         }
 
-
-        glm::vec3 distance = glm::vec3(player->m_position - Camera::getInstance().getPosition());
-        glm::vec3 c_velocity = glm::vec3(distance.x / CAMERA_TIME, distance.y / CAMERA_TIME, 0);
+        //Delta Time
         float currentTime = glfwGetTime();
         float delta = currentTime - previousTime;
         previousTime = glfwGetTime();
-        
-        glm::vec3 c = Camera::getInstance().getPosition();
-        if(!(c.x > player->m_position.x - THRESHOLD && c.y > player->m_position.y - THRESHOLD && c.x < player->m_position.x + THRESHOLD && c.y < player->m_position.y + THRESHOLD)) {
-            glm::vec3 tempCameraPos = Camera::getInstance().getPosition();
-            tempCameraPos += c_velocity * delta;
-            Camera::getInstance().setPosition(tempCameraPos);
-        }
-        // At each update(delta Time), translating Camera Position = velocity * deltaTime; D = V * T;
+
+        Camera::getInstance().followTarget(delta, CAMERA_TIME, THRESHOLD, player->m_position);
         engine->update();
+        
         glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        
         player->update(delta);
         player->setTransformMatrix(Camera::getInstance().getViewMatrix() * player->getTransformMatrix());
         player->setTransformMatrix(Camera::getInstance().getPerspective() * player->getTransformMatrix()); 
         player->Draw(*(engine->getShader()));
         engine->draw();
     }
-    //MOVE CAMERA THINGS INTO CAMERA.
-    //Scale Player in Gameobject.cpp.
-    //Fix Speed.
-    //implement basic light.
-    //TO-DO Wang's algorithm - Name generator & int generator, Make table.
-    //Write Report.
-    //Talk to borna.
+
     return 0;
 }

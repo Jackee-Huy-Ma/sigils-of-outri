@@ -1,7 +1,8 @@
 #include "Camera.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/compatibility.hpp>
-
+#include "../GameObject.h"
+#include <iostream>
 Camera::Camera()
     : m_position()
     , m_orientation()
@@ -88,4 +89,21 @@ void Camera::setViewMatrix() {
     glm::mat4 positionMatrix = glm::translate(glm::mat4(1), -m_position);
 
     m_viewMatrix = rotationMatrix * positionMatrix;
+}
+
+void Camera::followTarget(float delta, const float CAMERA_TIME, const float THRESHOLD, glm::vec3 & targetPosition) {
+    //Distance between Target and Camera
+    glm::vec3 distance = targetPosition - m_position;
+    
+    //Desired Velocity
+    glm::vec3 camera_velocity = glm::vec3(distance.x / CAMERA_TIME, distance.y / CAMERA_TIME, 0);
+
+    //Checks if Camera position is within a threshold.
+    if(!(camera_velocity.x > targetPosition.x - THRESHOLD 
+        && camera_velocity.y > targetPosition.y - THRESHOLD 
+        && camera_velocity.x < targetPosition.x + THRESHOLD 
+        && camera_velocity.y < targetPosition.y + THRESHOLD)) {
+        m_position += camera_velocity * delta;
+        setViewMatrix();
+    }
 }

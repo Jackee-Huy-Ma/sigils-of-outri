@@ -48,6 +48,11 @@ public:
     //draw
     void draw(Shader & shader);
 
+    //Object's speed
+    float m_speed = 0.0f;
+
+    //Object's velocity if it has one.
+    glm::vec3 m_velocity = glm::vec3(0);
 private:
     //Forward of GameObject
     glm::vec3 m_forward;
