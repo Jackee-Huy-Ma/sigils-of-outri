@@ -9,4 +9,6 @@ public:
     ~Player();
 
     void update(float deltaTime);
+
+    void Draw(Shader& shader);
 };
