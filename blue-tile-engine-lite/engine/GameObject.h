@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include <glad/glad.h>
-
+#include "graphics/Camera.h"
 class Quad;
 class Shader;
 class GameObject {
@@ -19,7 +19,7 @@ public:
     //virtual void Update();
 
     //Draw
-    void Draw(Shader& shader);
+    virtual void Draw(Shader& shader);
     
     //GameObject ID
     GLuint m_Id;

@@ -103,7 +103,7 @@ void Camera::followTarget(float delta, const float CAMERA_TIME, const float THRE
         && camera_velocity.y > targetPosition.y - THRESHOLD 
         && camera_velocity.x < targetPosition.x + THRESHOLD 
         && camera_velocity.y < targetPosition.y + THRESHOLD)) {
-        m_position += camera_velocity * delta;
+        m_position.x += camera_velocity.x * delta;
         setViewMatrix();
     }
 }
