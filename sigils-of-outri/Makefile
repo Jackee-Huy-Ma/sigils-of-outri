@@ -1,5 +1,5 @@
 #OBJS All c or cpp files
-OBJS =  main.cpp ../blue-tile-engine-lite/glad.c Player.cpp
+OBJS =  main.cpp ../blue-tile-engine-lite/glad.c Player.cpp Cyclone.cpp Fireball.cpp Slam.cpp Zombie.cpp MagicFrame.cpp CorpseExplosion.cpp
 
 #CC Which Compiler to use.
 CC = g++

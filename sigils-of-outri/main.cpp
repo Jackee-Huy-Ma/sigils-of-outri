@@ -32,7 +32,7 @@ int main() {
     std::shared_ptr<GameEngine> engine = std::make_shared<GameEngine>(gameWindow.getWindow());
 
     //Camera Setup
-    Camera::getInstance().setPosition(glm::vec3(0, 14.0f, 50.0f));
+    Camera::getInstance().setPosition(glm::vec3(0, 12.5f, 50.0f));
     Camera::getInstance().setPerspective(CAMERA_FOV, (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP);
     
     GameObject * player = (Player *) new Player("Player", glm::vec3(0), glm::vec3(0), glm::vec3(0.025), "../assets/main_character.png");
