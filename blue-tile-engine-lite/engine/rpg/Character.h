@@ -9,7 +9,6 @@ public:
     
     ~Character();
     void update(float deltaTime);
-    void Draw(Shader& shader);
     
     int m_health = 0;
     int m_mana= 0;

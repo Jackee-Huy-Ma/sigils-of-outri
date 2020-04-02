@@ -17,7 +17,7 @@ CorpseExplosion::~CorpseExplosion() {
 int CorpseExplosion::activate(Stats & stat, Character & target) {
     std::cout << m_name << " activated" << std::endl;
     
-    int damage = target.m_health * 0.5;
+    int damage = target.m_health * 0.1;
 
     return damage;
 }

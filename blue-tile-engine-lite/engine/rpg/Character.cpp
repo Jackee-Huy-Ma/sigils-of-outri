@@ -19,9 +19,3 @@ void Character::update(float deltaTime) {
 
 }
 
-void Character::Draw(Shader & shader) {
-    updateTransformMatrix();
-    setTransformMatrix(Camera::getInstance().getViewMatrix() * getTransformMatrix());
-    setTransformMatrix(Camera::getInstance().getPerspective() * getTransformMatrix());
-    GameObject::Draw(shader);
-}

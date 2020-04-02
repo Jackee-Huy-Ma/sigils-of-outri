@@ -8,6 +8,7 @@
 
 #include <glm/glm.hpp>
 #include "Player.h"
+#include "Enemy.h"
 #include <iostream>
 #include <memory>
 
@@ -36,8 +37,8 @@ int main() {
     Camera::getInstance().setPerspective(CAMERA_FOV, (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP);
     
     GameObject * player = (Player *) new Player("Player", glm::vec3(0), glm::vec3(0), glm::vec3(0.025), "../assets/main_character.png");
-
-    GameObject * background = new GameObject("Background", glm::vec3(0), glm::vec3(0), glm::vec3(0.005), "../assets/Capture.png");
+    GameObject * background = new GameObject("Background", glm::vec3(0, 6, 0), glm::vec3(0), glm::vec3(0.17), "../assets/Capture.png");
+    GameObject * boss = (Enemy *) new Enemy("Boss", glm::vec3(10, 0 , 0), glm::vec3(0), glm::vec3(0.033), "../assets/shadow_protag.png");
 
     float previousTime = glfwGetTime();
     while(!glfwWindowShouldClose(gameWindow.getWindow())) {
@@ -79,6 +80,8 @@ int main() {
         background->Draw(*(engine->getShader()));
         player->update(delta);
         player->Draw(*(engine->getShader()));
+        boss->update(delta);
+        boss->Draw(*(engine->getShader()));
         engine->draw();
     }
 

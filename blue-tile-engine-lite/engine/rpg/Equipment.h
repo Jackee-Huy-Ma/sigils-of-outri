@@ -10,6 +10,5 @@ public:
     int m_id;
     Stats m_stats;
     bool isEquip;
-    void generate(std::vector<Equipment *> & equipment);
 private:
 };
