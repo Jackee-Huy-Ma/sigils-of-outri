@@ -8,6 +8,7 @@
 
 #include <glm/glm.hpp>
 #include "Player.h"
+#include "Enemy.h"
 #include <iostream>
 #include <memory>
 
@@ -32,14 +33,19 @@ int main() {
     std::shared_ptr<GameEngine> engine = std::make_shared<GameEngine>(gameWindow.getWindow());
 
     //Camera Setup
-    Camera::getInstance().setPosition(glm::vec3(0, 14.0f, 50.0f));
+    Camera::getInstance().setPosition(glm::vec3(0, 12.5f, 50.0f));
     Camera::getInstance().setPerspective(CAMERA_FOV, (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, CAMERA_NEAR_CLIP, CAMERA_FAR_CLIP);
     
-    GameObject * player = (Player *) new Player("Player", glm::vec3(0), glm::vec3(0), glm::vec3(0.025), "../assets/main_character.png");
-
-    GameObject * background = new GameObject("Background", glm::vec3(0), glm::vec3(0), glm::vec3(0.005), "../assets/Capture.png");
+    Player * player = new Player("Player", glm::vec3(0), glm::vec3(0), glm::vec3(0.025), "../assets/main_character.png");
+    GameObject * background = new GameObject("Background", glm::vec3(0, 6, 0), glm::vec3(0), glm::vec3(0.17), "../assets/Capture.png");
+    Enemy * boss = new Enemy("Boss", glm::vec3(15, 8, 0), glm::vec3(0), glm::vec3(0.05), "../assets/boss.png");
 
     float previousTime = glfwGetTime();
+
+    player->simulate(*player,*boss);
+
+    player->printMap();
+    //player->printMap();
     while(!glfwWindowShouldClose(gameWindow.getWindow())) {
         //Set Ortho.
         Camera::getInstance().setOrtho(gameWindow.getWindow());
@@ -77,6 +83,8 @@ int main() {
         
         background->update(delta);
         background->Draw(*(engine->getShader()));
+        boss->update(delta);
+        boss->Draw(*(engine->getShader()));
         player->update(delta);
         player->Draw(*(engine->getShader()));
         engine->draw();

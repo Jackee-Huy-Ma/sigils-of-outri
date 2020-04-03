@@ -25,6 +25,9 @@ void GameObject::update(float deltaTime) {
 }
 
 void GameObject::Draw(Shader& shader) {
+    updateTransformMatrix();
+    setTransformMatrix(Camera::getInstance().getViewMatrix() * getTransformMatrix());
+    setTransformMatrix(Camera::getInstance().getPerspective() * getTransformMatrix());
     shader.use();
     shader.setMat4("transform",m_transformMatrix);
     m_mesh->draw();
