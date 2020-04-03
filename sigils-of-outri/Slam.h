@@ -8,7 +8,7 @@ public:
     Slam(const char * name);
     ~Slam();
     
-    virtual int activate(Stats & stats, Character & target) override;
+    virtual float activate(Stats & stats, Character & target) override;
 
 private:
 

@@ -8,7 +8,7 @@ public:
     CorpseExplosion(const char * name);
     ~CorpseExplosion();
     
-    virtual int activate(Stats & stats, Character & target) override;
+    virtual float activate(Stats & stats, Character & target) override;
 
 private:
 

@@ -9,7 +9,7 @@ Skill::~Skill() {
 
 }
 
-int Skill::activate(Stats & stats, Character & target) {
+float Skill::activate(Stats & stats, Character & target) {
     std::cout << m_name << " activated" << std::endl;
     return 0;
 }

@@ -8,7 +8,7 @@ public:
     Cyclone(const char * name);
     ~Cyclone();
     
-    virtual int activate(Stats & stats, Character & target) override;
+    virtual float activate(Stats & stats, Character & target) override;
 
 private:
 
