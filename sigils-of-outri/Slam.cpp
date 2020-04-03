@@ -17,7 +17,7 @@ Slam::~Slam() {
 float Slam::activate(Stats & stat, Character & target) {
     std::cout << m_name << " activated" << std::endl;
     
-    float damage = (stat.attack) - (target.stats.defense);
+    float damage = (stat.attack * 2) - (target.stats.defense);
 
     return damage;
 }

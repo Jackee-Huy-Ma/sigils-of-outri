@@ -17,6 +17,6 @@ CorpseExplosion::~CorpseExplosion() {
 float CorpseExplosion::activate(Stats & stat, Character & target) {
     std::cout << m_name << " activated" << std::endl;
     
-    int damage = 40 + (stat.attack) - (target.stats.defense);
+    int damage = (stat.magicAttack * 2) - (target.stats.magicDefense);
     return damage;
 }

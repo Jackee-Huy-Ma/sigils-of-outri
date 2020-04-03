@@ -18,7 +18,7 @@ Cyclone::~Cyclone() {
 float Cyclone::activate(Stats & stat, Character & target) {
     std::cout << m_name << " activated" << std::endl;
     
-    float damage = stat.attack - target.stats.defense + 20;
+    float damage = 50 + stat.attack * 2 - target.stats.defense;
 
     return damage;
 }
