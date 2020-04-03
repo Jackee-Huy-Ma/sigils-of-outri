@@ -14,10 +14,10 @@ MagicFrame::~MagicFrame() {
 //Stats object to do math.
 //Target to use the skill on.
 //Returns damage.
-int MagicFrame::activate(Stats & stat, Character & target) {
+float MagicFrame::activate(Stats & stat, Character & target) {
     std::cout << m_name << " activated" << std::endl;
     
-    int damage = target.stats.magicDefense + target.stats.magicAttack * 2;
+    float damage = (100 + stat.magicAttack) - target.stats.magicDefense;
 
     return damage;
 }

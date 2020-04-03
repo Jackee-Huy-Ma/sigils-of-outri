@@ -15,10 +15,10 @@ Zombie::~Zombie() {
 //Stats object to do math.
 //Target to use the skill on.
 //Returns damage.
-int Zombie::activate(Stats & stat, Character & target) {
+float Zombie::activate(Stats & stat, Character & target) {
     std::cout << m_name << " activated:" << std::endl;
     
-    int damage = 50;
+    float damage =  100 + (stat.attack) - (target.stats.magicDefense);
 
     return damage;
 }

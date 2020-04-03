@@ -8,7 +8,7 @@ public:
     MagicFrame(const char * name);
     ~MagicFrame();
     
-    virtual int activate(Stats & stats, Character & target) override;
+    virtual float activate(Stats & stats, Character & target) override;
 
 private:
 

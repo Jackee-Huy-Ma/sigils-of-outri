@@ -15,10 +15,10 @@ Fireball::~Fireball() {
 //Stats object to do math.
 //Target to use the skill on.
 //Returns damage.
-int Fireball::activate(Stats & stat, Character & target) {
+float Fireball::activate(Stats & stat, Character & target) {
     std::cout << m_name << " activated" << std::endl;
     
-    int damage = (stat.magicAttack * 100) - target.stats.magicDefense;
+    float damage = 100 + (stat.magicAttack) - (target.stats.defense + 1);
 
     return damage;
 }

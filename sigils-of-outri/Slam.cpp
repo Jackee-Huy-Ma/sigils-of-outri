@@ -14,10 +14,10 @@ Slam::~Slam() {
 //Stats object to do math.
 //Target to use the skill on.
 //Returns damage.
-int Slam::activate(Stats & stat, Character & target) {
+float Slam::activate(Stats & stat, Character & target) {
     std::cout << m_name << " activated" << std::endl;
     
-    int damage = (stat.attack + 20) - target.stats.defense;
+    float damage = (stat.attack) - (target.stats.defense);
 
     return damage;
 }

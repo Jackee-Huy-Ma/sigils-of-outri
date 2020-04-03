@@ -14,10 +14,9 @@ CorpseExplosion::~CorpseExplosion() {
 //Stats object to do math.
 //Target to use the skill on.
 //Returns damage.
-int CorpseExplosion::activate(Stats & stat, Character & target) {
+float CorpseExplosion::activate(Stats & stat, Character & target) {
     std::cout << m_name << " activated" << std::endl;
     
-    int damage = target.m_health * 0.1;
-
+    int damage = 40 + (stat.attack) - (target.stats.defense);
     return damage;
 }

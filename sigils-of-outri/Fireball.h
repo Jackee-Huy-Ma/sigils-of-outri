@@ -8,7 +8,7 @@ public:
     Fireball(const char * name);
     ~Fireball();
     
-    virtual int activate(Stats & stats, Character & target) override;
+    virtual float activate(Stats & stats, Character & target) override;
 
 private:
 

@@ -44,8 +44,8 @@ int main() {
 
     player->simulate(*player,*boss);
 
+    player->autoEquip();
     player->printMap();
-    //player->printMap();
     while(!glfwWindowShouldClose(gameWindow.getWindow())) {
         //Set Ortho.
         Camera::getInstance().setOrtho(gameWindow.getWindow());

@@ -15,10 +15,10 @@ Cyclone::~Cyclone() {
 //Stats object to do math.
 //Target to use the skill on.
 //Returns damage.
-int Cyclone::activate(Stats & stat, Character & target) {
+float Cyclone::activate(Stats & stat, Character & target) {
     std::cout << m_name << " activated" << std::endl;
     
-    int damage = (stat.attack * 200) - (target.stats.defense);
+    float damage = stat.attack - target.stats.defense + 20;
 
     return damage;
 }
