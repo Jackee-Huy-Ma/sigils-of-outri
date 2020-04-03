@@ -126,7 +126,7 @@ void Player::simulate(Player & player,Enemy & target) {
     
     player.setLevel(50);
     target.setLevel(50);
-    
+
     std::string playerSkillName;
     std::string enemySkillName;
 
@@ -140,7 +140,8 @@ void Player::simulate(Player & player,Enemy & target) {
     //std::cout << "Enemy Stats:" << target.stats.attack << std::endl;
     for(auto it = player.inventory.begin(); it!=player.inventory.end(); ++it) {
         for(int j = 0; j < it->second.size(); j++) {
-            while(player.m_currentHealth > 0 && target.m_currentHealth > 0) {
+            playerDamage = 0;
+            while(totalDamageReceived < player.m_currentHealth && totalDamage < target.m_currentHealth) {
                 if(playerDamage == 0) {
                     //Setup the way to figure out what skill does the most damage.
                     //Execute only once per Equipment Gear being simulated.
@@ -152,6 +153,7 @@ void Player::simulate(Player & player,Enemy & target) {
                     playerTempStats.magicAttack = player.stats.magicAttack + it->second[j]->m_stats.magicAttack;
                     playerTempStats.magicDefense = player.stats.magicDefense + it->second[j]->m_stats.magicDefense;    
                     
+                   
                     for(int k = 0; k < player.m_skill.size(); k++) {
                         //std::cout << "Player casting:" << player.m_skill[k]->m_name << std::endl;
                         float playerSkillDamage = player.m_skill[k]->activate(playerTempStats,target);
@@ -174,12 +176,8 @@ void Player::simulate(Player & player,Enemy & target) {
                 totalDamage += playerDamage;
                 totalDamageReceived += enemyDamage;
                 turns++;
-                player.m_currentHealth = player.m_currentHealth - enemyDamage;
-                target.m_currentHealth = target.m_currentHealth - playerDamage;
 
-               
-                
-                if(!(player.m_currentHealth >= 0 && target.m_currentHealth >= 0)) {
+                if(!(totalDamageReceived < player.m_currentHealth && totalDamage < target.m_currentHealth)) {
                     std::cout << "Total Turns:" << turns << std::endl;
                 }
             }
@@ -201,8 +199,6 @@ void Player::simulate(Player & player,Enemy & target) {
                 }
             }
            
-            player.setLevel(50);
-            target.setLevel(50);
             playerDamage = 0;
             enemyDamage = 0;
             turns = 0;

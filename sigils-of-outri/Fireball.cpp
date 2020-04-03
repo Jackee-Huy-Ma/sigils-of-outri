@@ -18,7 +18,7 @@ Fireball::~Fireball() {
 float Fireball::activate(Stats & stat, Character & target) {
     std::cout << m_name << " activated" << std::endl;
     
-    float damage = 100 + (stat.magicAttack) - (target.stats.defense + 1);
+    float damage = 100 + (stat.magicAttack * 2) - (target.stats.defense + 1);
 
     return damage;
 }
