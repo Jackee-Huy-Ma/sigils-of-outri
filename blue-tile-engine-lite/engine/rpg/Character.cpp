@@ -8,7 +8,8 @@ Character::Character(std::string name, glm::vec3 position,
                     m_speed = 0.0f;
                     m_health = 0;
                     m_mana = 0;
-                    
+                    m_currentHealth = 0;
+                    m_currentMana = 0;
 }
 
 Character::~Character() {
@@ -19,3 +20,6 @@ void Character::update(float deltaTime) {
 
 }
 
+void Character::setLevel(int level) {
+    std::cout << "Character setLevel called" << std::endl;
+}

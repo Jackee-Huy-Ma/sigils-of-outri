@@ -10,5 +10,6 @@ public:
     int m_id;
     Stats m_stats;
     bool isEquip;
+    float fitness = 0;
 private:
 };

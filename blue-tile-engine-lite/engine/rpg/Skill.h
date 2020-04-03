@@ -11,4 +11,5 @@ public:
     ~Skill();
     std::string m_name;
     virtual int activate(Stats & stats, Character & target);
+    std::string getName();
 };

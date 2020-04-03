@@ -13,3 +13,7 @@ int Skill::activate(Stats & stats, Character & target) {
     std::cout << m_name << " activated" << std::endl;
     return 0;
 }
+
+std::string Skill::getName() {
+    return m_name;
+}

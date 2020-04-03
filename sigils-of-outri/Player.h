@@ -3,8 +3,10 @@
 #include <vector>
 #include <random>
 #include <map>
+
 class Skill;
 class Equipment;
+class Enemy;
 class Player : public Character {
 public:    
     Player(std::string name, glm::vec3 position,
@@ -24,5 +26,17 @@ public:
 
     //TO-DO boolean parameter if item is equiped.
     void printMap();
+
+    void setLevel(int level);
+
+    //TO-DO
+    //Goal is to calculate a type float called fitness value.
+    // Fitness value = total damage dealt / total damage mitagated.
+    // I need a boss.
+    // Character & target.
+    // go inside my map. inside for loop of it->second (while character hp not dead... simulate).
+    // once i'm done that for loop, every equipment should have a new float value called fitness.
+    // Break out manually.
+    void simulate(Player & player, Enemy & target);
 
 };
