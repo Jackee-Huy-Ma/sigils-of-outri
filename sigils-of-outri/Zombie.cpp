@@ -18,7 +18,7 @@ Zombie::~Zombie() {
 float Zombie::activate(Stats & stat, Character & target) {
     std::cout << m_name << " activated:" << std::endl;
     
-    float damage =  100 + (stat.attack) - (target.stats.magicDefense);
+    float damage =  50 + (stat.attack * 2) - (target.stats.magicDefense + 1);
 
     return damage;
 }

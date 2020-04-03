@@ -17,7 +17,7 @@ MagicFrame::~MagicFrame() {
 float MagicFrame::activate(Stats & stat, Character & target) {
     std::cout << m_name << " activated" << std::endl;
     
-    float damage = (100 + stat.magicAttack) - target.stats.magicDefense;
+    float damage = (100 + stat.magicAttack) - ((target.stats.magicDefense + target.stats.defense) / 2);
 
     return damage;
 }
