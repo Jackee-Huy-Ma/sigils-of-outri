@@ -11,7 +11,7 @@
 #include "Enemy.h"
 #include <iostream>
 #include <memory>
-
+#include <engine/SoundEngine.h>
 constexpr int WINDOW_WIDTH = 800;
 constexpr int WINDOW_HEIGHT = 600;
 
@@ -46,6 +46,7 @@ int main() {
 
     player->autoEquip();
     player->printMap();
+    SoundEngine * soundengine = new SoundEngine("../assets/game_music.wav");
     while(!glfwWindowShouldClose(gameWindow.getWindow())) {
         //Set Ortho.
         Camera::getInstance().setOrtho(gameWindow.getWindow());
