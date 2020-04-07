@@ -45,7 +45,7 @@ int main() {
 
     float previousTime = glfwGetTime();
 
-    //SoundEngine * soundengine = new SoundEngine("../assets/game_music.wav");
+    SoundEngine * soundengine = new SoundEngine("../assets/game_music.wav");
 
     std::vector<GameObject *> list;
 
