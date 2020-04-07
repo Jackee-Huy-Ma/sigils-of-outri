@@ -105,6 +105,7 @@ int main() {
                 list.erase(list.begin());
             }else {
                 list.erase(list.begin() + 1);
+                glfwSetWindowShouldClose(gameWindow.getWindow(), true);
             }
         }
         /*boss->update(delta);

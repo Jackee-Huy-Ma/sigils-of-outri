@@ -128,8 +128,8 @@ void Player::setLevel(int level) {
 void Player::simulate(Player & player,Enemy & target) {
     //Setting the player and target to be the same level
     
-    player.setLevel(20);
-    target.setLevel(20);
+    player.setLevel(35);
+    target.setLevel(35);
 
     std::string playerSkillName;
     std::string enemySkillName;
@@ -242,12 +242,12 @@ bool Player::combat(Player & player, Enemy & target) {
         //Player is selecting skill.
         while(std::cin >> option) {
             if(option >= 0 && option < player.m_skill.size()) {
-                std::cout << "Player chose:" << player.m_skill[option]->getName() << "skill!" << std::endl;
-                std::cout << "Enemy choose:" << enemySkillName << std::endl;
+                std::cout << "Player selected:" << player.m_skill[option]->getName() << std::endl;
+                std::cout << "Enemy selected:" << enemySkillName << std::endl;
                 
                 playerDamage = player.m_skill[option]->activate(stats, target);
-                std::cout << "Player does" << playerDamage << std::endl;
-                std::cout << "Enemy does" << enemyDamage << std::endl;
+                std::cout << "Player dealt:" << playerDamage << std::endl;
+                std::cout << "Enemy dealt:" << enemyDamage << std::endl;
                 playerTotalDamage += playerDamage;
                 enemyTotalDamage += enemyDamage;
                 std::cout << "Enemy current hp" << target.m_currentHealth - playerTotalDamage << std::endl;
