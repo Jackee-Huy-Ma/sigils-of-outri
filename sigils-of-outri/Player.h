@@ -31,4 +31,6 @@ public:
     void simulate(Player & player, Enemy & target);
 
     void autoEquip();
+
+    bool combat(Player & player, Enemy & target);
 };

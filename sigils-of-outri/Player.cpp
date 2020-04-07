@@ -102,6 +102,10 @@ void Player::autoEquip() {
                         << " MagicDefense:" << it->second[j]->m_stats.magicDefense
                         << " Fitness:" << it->second[j]->fitness
                         << std::endl;
+                stats.attack += it->second[j]->m_stats.attack;
+                stats.defense += it->second[j]->m_stats.defense;
+                stats.magicAttack += it->second[j]->m_stats.magicAttack;
+                stats.magicDefense += it->second[j]->m_stats.magicDefense;
             }
         }
     }
@@ -124,8 +128,8 @@ void Player::setLevel(int level) {
 void Player::simulate(Player & player,Enemy & target) {
     //Setting the player and target to be the same level
     
-    player.setLevel(50);
-    target.setLevel(50);
+    player.setLevel(20);
+    target.setLevel(20);
 
     std::string playerSkillName;
     std::string enemySkillName;
@@ -208,5 +212,59 @@ void Player::simulate(Player & player,Enemy & target) {
         }
 
     }
-    
+}
+
+bool Player::combat(Player & player, Enemy & target) {
+    bool isDead = true;
+    int option = -1;
+
+    float enemyDamage = 0;
+    std::string enemySkillName = "";
+
+    float playerDamage = 0;
+    float enemyTotalDamage = 0;
+    float playerTotalDamage = 0;
+    for(int l = 0; l < target.m_skill.size(); l++) {
+        //std::cout << "Enemy casting:" << target.m_skill[l]->m_name << std::endl;
+        float enemySkillDamage = target.m_skill[l]->activate(target.stats, player);
+        if(enemyDamage <= enemySkillDamage) {
+            enemySkillName = target.m_skill[l]->m_name;
+            enemyDamage = enemySkillDamage;
+        }
+    }
+
+    std::cout << "Combat Start!" << std::endl;
+    while(player.m_currentHealth > 0 && target.m_currentHealth > 0) {
+        std::cout << "Select Skill:" << std::endl;
+        for(int i = 0; i < player.m_skill.size(); i++) {
+            std::cout << i << ":" << player.m_skill[i]->getName() << std::endl;
+        }
+        //Player is selecting skill.
+        while(std::cin >> option) {
+            if(option >= 0 && option < player.m_skill.size()) {
+                std::cout << "Player chose:" << player.m_skill[option]->getName() << "skill!" << std::endl;
+                std::cout << "Enemy choose:" << enemySkillName << std::endl;
+                
+                playerDamage = player.m_skill[option]->activate(stats, target);
+                std::cout << "Player does" << playerDamage << std::endl;
+                std::cout << "Enemy does" << enemyDamage << std::endl;
+                playerTotalDamage += playerDamage;
+                enemyTotalDamage += enemyDamage;
+                std::cout << "Enemy current hp" << target.m_currentHealth - playerTotalDamage << std::endl;
+                std::cout << "Player current hp" << player.m_currentHealth - enemyTotalDamage << std::endl;
+
+                if(playerTotalDamage > target.m_currentHealth) {
+                    isDead = true;
+                    std::cout << "Enemy has been slained" << std::endl;
+                    return isDead;
+                }
+
+                if(enemyTotalDamage > player.m_currentHealth) {
+                    std::cout << "Player has been slained" << std::endl;
+                    return isDead;
+                }
+            }
+        }
+    }
+    return isDead;
 }
