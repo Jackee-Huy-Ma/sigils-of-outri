@@ -29,7 +29,7 @@ void Enemy::setLevel(int level) {
     stats.magicAttack = level * stats.magicAttack;
     stats.magicDefense = level * stats.magicDefense;
 
-    m_health = level * 350;
+    m_health = level * 136;
     m_mana = m_mana * 11 * level;
     m_currentHealth = m_health;
     m_currentMana = m_mana;

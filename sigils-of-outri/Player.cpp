@@ -15,6 +15,8 @@ constexpr int INVENTORYSIZE = 30;
 //0:helmet, 1 = body, 2 = lower body, 3 = boots, 4 = weapon.
 constexpr int MAXEQUIP = 5;
 
+constexpr int MINSTATS = -2;
+constexpr int MAXSTATS = 10;
 Player::Player(std::string name, glm::vec3 position,
             glm::vec3 rotation, glm::vec3 scale, const char * texturePath) : 
                 Character{name, position, rotation, scale, texturePath} {
@@ -50,7 +52,7 @@ void Player::update(float deltaTime) {
 
 void Player::generate(std::map<int, std::vector<Equipment *>> & inventory) {
     std::default_random_engine e;
-    std::uniform_int_distribution<int> u(-2, 10);
+    std::uniform_int_distribution<int> u(MINSTATS, MAXSTATS);
 
     //Setup initial contents of the map.
 
@@ -118,7 +120,7 @@ void Player::setLevel(int level) {
     stats.magicAttack = level * stats.magicAttack;
     stats.magicDefense = level * stats.magicDefense;
 
-    m_health = level * 400;
+    m_health = level * 123;
     m_mana = m_mana * 10 * level;
     m_currentHealth = m_health;
     m_currentMana = m_mana;
@@ -129,7 +131,22 @@ void Player::simulate(Player & player,Enemy & target) {
     //Setting the player and target to be the same level
     
     player.setLevel(35);
+    std::cout << "Maximum health:" << player.m_health 
+                << " Maximum Mana:" << player.m_mana
+                << " Attack:" << player.stats.attack
+                << " Defense:" << player.stats.defense
+                << " Magic Attack:" << player.stats.magicAttack
+                << " Magic Defense:" << player.stats.defense
+                << std::endl;  
     target.setLevel(35);
+
+    std::cout << "Maximum health:" << target.m_health 
+                << " Maximum Mana:" << target.m_mana
+                << " Attack:" << target.stats.attack
+                << " Defense:" << target.stats.defense
+                << " Magic Attack:" << target.stats.magicAttack
+                << " Magic Defense:" << target.stats.defense
+                << std::endl;  
 
     std::string playerSkillName;
     std::string enemySkillName;
@@ -142,6 +159,7 @@ void Player::simulate(Player & player,Enemy & target) {
 
     int turns = 0;
     //std::cout << "Enemy Stats:" << target.stats.attack << std::endl;
+    
     for(auto it = player.inventory.begin(); it!=player.inventory.end(); ++it) {
         for(int j = 0; j < it->second.size(); j++) {
             playerDamage = 0;

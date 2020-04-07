@@ -73,8 +73,16 @@ int main() {
             player->m_velocity = glm::vec3(player->m_speed, 0, 0);    
         }else if((glfwGetKey(gameWindow.getWindow(), GLFW_KEY_E) == GLFW_PRESS) && isEquip == false) {
             isEquip = true;
+            float testTime = glfwGetTime();
             player->simulate(*player,*boss);
+            std::cout << "Auto Equip activated!" << std::endl;
             player->autoEquip();
+            float endTime = glfwGetTime();
+            float totalTime = endTime - testTime;
+            std::cout << "Total Time for Auto Equip:" << totalTime << std::endl;
+            
+            //Uncomment this to see all itmes.
+            //player->printMap();
         }else {
             player->m_speed = 0.0f;
             player->m_velocity = glm::vec3(0);
