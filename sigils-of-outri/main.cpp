@@ -22,6 +22,9 @@ constexpr float THRESHOLD = 5.0f;
 constexpr float CAMERA_TIME = 1.25f;
 
 int main() {
+    //boolean used to equip gear once.
+    bool isEquip = false;
+    bool isBattle = false;
     GameWindow gameWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
     int windowSetupStatus = gameWindow.SetupGLFWwindow();
 
@@ -42,11 +45,13 @@ int main() {
 
     float previousTime = glfwGetTime();
 
-    player->simulate(*player,*boss);
-
-    player->autoEquip();
-    player->printMap();
     SoundEngine * soundengine = new SoundEngine("../assets/game_music.wav");
+
+    std::vector<GameObject *> list;
+
+    list.push_back(boss);
+    list.push_back(player);
+
     while(!glfwWindowShouldClose(gameWindow.getWindow())) {
         //Set Ortho.
         Camera::getInstance().setOrtho(gameWindow.getWindow());
@@ -66,6 +71,10 @@ int main() {
                 player->m_rotation.x = player->m_rotation.x * -1;
             player->m_speed = -25.0f;
             player->m_velocity = glm::vec3(player->m_speed, 0, 0);    
+        }else if((glfwGetKey(gameWindow.getWindow(), GLFW_KEY_E) == GLFW_PRESS) && isEquip == false) {
+            isEquip = true;
+            player->simulate(*player,*boss);
+            player->autoEquip();
         }else {
             player->m_speed = 0.0f;
             player->m_velocity = glm::vec3(0);
@@ -84,10 +93,25 @@ int main() {
         
         background->update(delta);
         background->Draw(*(engine->getShader()));
-        boss->update(delta);
+        for(int i = 0; i < list.size(); i++) {
+            list[i]->update(delta);
+            list[i]->Draw(*(engine->getShader()));
+        }
+        if(player->m_position.x >= boss->m_position.x && isBattle == false) {
+            isBattle = true;
+            std::cout << "Combat Engaged!" << std::endl;
+            bool test = player->combat(*player, *boss);
+            if(test == true) {
+                list.erase(list.begin());
+            }else {
+                list.erase(list.begin() + 1);
+            }
+        }
+        /*boss->update(delta);
         boss->Draw(*(engine->getShader()));
         player->update(delta);
         player->Draw(*(engine->getShader()));
+        */
         engine->draw();
     }
 
