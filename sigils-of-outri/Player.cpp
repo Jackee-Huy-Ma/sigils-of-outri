@@ -92,9 +92,8 @@ void Player::autoEquip() {
     for(auto it = inventory.begin(); it!= inventory.end(); ++it) {
         std::cout << "{Slot:" << it->first << "}" << std::endl
             << "Items:" << std::endl;
-        
+        std::sort(it->second.begin(), it->second.end(), [](Equipment * a, Equipment * b) { return a->fitness > b->fitness;});
         for(int j = 0; j < it->second.size(); j++) {
-            std::sort(it->second.begin(), it->second.end(), [](Equipment * a, Equipment * b) { return a->fitness > b->fitness;});
             it->second[0]->isEquip = true;
             if(it->second[j]->isEquip == true) {
                 std::cout << "ID:" << it->second[j]->m_id
