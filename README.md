@@ -1,5 +1,5 @@
 # Sigils-of-Outri
-Sigils of outri is a simple role playing game.
+Sigils of outri is a simple role playing game developed for linux platforms.
 
 ## Dependencies
 Mesa 3D graphics library, openal-soft, c++
