@@ -1,4 +1,4 @@
-# sigils-of-outri
+# Sigils-of-Outri
 Sigils of outri is a simple role playing game.
 
 ## Dependencies
